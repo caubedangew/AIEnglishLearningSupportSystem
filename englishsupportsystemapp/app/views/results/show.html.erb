@@ -1,0 +1,25 @@
+<% content_for :title, "result_details"%>
+<h2 class="text-info text-center">List of result_details</h1>
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Score: </th>
+        <th>Time: </th>
+        <th>Created time: </th>
+        <th>Updated time: </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @result_details.each do |result_detail| %>
+        <tr>
+            <td><%= result_detail.score%></td>
+            <td><%= result_detail.time %></td>
+            <td><%= result_detail.created_at %></td>
+            <td><%= result_detail.updated_at %></td>
+            <td><%= link_to '&#9998;'.html_safe, edit_result_detail_path(result_detail), class: "btn btn-primary" %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

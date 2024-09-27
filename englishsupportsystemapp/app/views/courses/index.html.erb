@@ -1,0 +1,38 @@
+<% content_for :title, "Courses"%>
+<h2 class="text-info text-center">List of Courses</h1>
+
+<%= link_to 'Add course'.html_safe, new_course_path(), class: "btn btn-primary" %>
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name: </th>
+        <th>Description: </th>
+        <th>Level: </th>
+        <th>Created time</th>
+        <th>Updated time</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @courses.each do |course| %>
+        <tr>
+            <td><%= course.name%></td>
+            <td><%= course.description %></td>
+            <td><%= course.level %></td>
+            <td><%= course.created_at %></td>
+            <td><%= course.updated_at %></td>
+            <td>
+                <%= link_to '&#9998;'.html_safe, edit_course_path(course), class: "btn btn-primary" %>
+                <%= link_to '&times;'.html_safe,
+                    course_path(course.id), class: "btn btn-danger",
+                    data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "Are you sure to delete it?"
+                    } 
+                %>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

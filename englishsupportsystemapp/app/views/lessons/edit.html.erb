@@ -1,0 +1,34 @@
+<% content_for :title, "Edit lesson" %>
+
+<%= form_with model: @lesson do |form| %>
+  <div class="mb-3">
+    <%= form.label :name, "Name:", class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+    <% @lesson.errors.full_messages_for(:name).each do |message| %>
+      <div class="alert alert-danger mt-1"><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :content, "Content:", class: "form-label" %>
+    <%= form.text_field :content, class: "form-control" %>
+    <% @lesson.errors.full_messages_for(:content).each do |message| %>
+      <div class="alert alert-danger mt-1"><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :course_id, "Course:", {class: "form-label"} %>
+    <%= form.select :course_id, @courses.map {
+        |course| [course.name, course.id]
+      }, {}, {class: "form-control"}
+     %>
+    <% @lesson.errors.full_messages_for(:course_id).each do |message| %>
+      <div class="alert alert-danger mt-1"><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit "Edit", class: "btn btn-primary" %>
+  </div>
+<% end %>

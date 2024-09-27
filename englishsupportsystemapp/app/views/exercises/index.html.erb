@@ -1,0 +1,39 @@
+<% content_for :title, "Exercises"%>
+<h2 class="text-info text-center">List of Exercises</h1>
+
+<%= link_to 'Add exercises'.html_safe, new_exercise_path(), class: "btn btn-primary" %>
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name: </th>
+        <th>Type: </th>
+        <th>Created time: </th>
+        <th>Updated time: </th>
+        <th>Lesson: 
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @exercises.each do |exercise| %>
+        <tr>
+            <td><%= exercise.name%></td>
+            <td><%= exercise.type %></td>
+            <td><%= exercise.created_at %></td>
+            <td><%= exercise.updated_at %></td>
+            <td><%= exercise.lesson.name %></td>
+            <td>
+                <%= link_to '&#9432;'.html_safe, exercise_path(exercise.id), class: "btn btn-success" %>
+                <%= link_to '&#9998;'.html_safe, edit_exercise_path(exercise), class: "btn btn-primary" %>
+                <%= link_to '&times;'.html_safe,
+                    exercise_path(exercise.id), class: "btn btn-danger",
+                    data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "Are you sure to delete it?"
+                    } 
+                %>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

@@ -1,0 +1,27 @@
+<% content_for :title, "Results"%>
+<h2 class="text-info text-center">List of Results</h1>
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>User: </th>
+        <th>Exercise: </th>
+        <th>Created time: </th>
+        <th>Updated time: </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @results.each do |result| %>
+        <tr>
+            <td><%= result.user.last_name%> <%= result.user.first_name%></td>
+            <td><%= result.exercise.name %></td>
+            <td><%= result.created_at %></td>
+            <td><%= result.updated_at %></td>
+            <td>
+                <%= link_to '&#9998;'.html_safe, result_path(result.id), class: "btn btn-primary" %>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

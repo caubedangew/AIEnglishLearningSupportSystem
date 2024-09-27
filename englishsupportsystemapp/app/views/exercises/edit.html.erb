@@ -1,0 +1,31 @@
+<% content_for :title, "Add exercise" %>
+
+<%= form_with model: @exercise do |form| %>
+  <div class="mb-3">
+    <%= form.label :name, "Name:", class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+    <% @exercise.errors.full_messages_for(:name).each do |message| %>
+      <div class="alert alert-danger mt-1"><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :type, "Type:", class: "form-label" %>
+    <%= form.text_field :type, class: "form-control" %>
+    <% @exercise.errors.full_messages_for(:type).each do |message| %>
+      <div class="alert alert-danger mt-1"><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :level, "Level:", class: "form-label" %>
+    <%= form.text_field :level, class: "form-control" %>
+    <% @exercise.errors.full_messages_for(:level).each do |message| %>
+      <div class="alert alert-danger mt-1"><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit "Edit", class: "btn btn-primary" %>
+  </div>
+<% end %>
