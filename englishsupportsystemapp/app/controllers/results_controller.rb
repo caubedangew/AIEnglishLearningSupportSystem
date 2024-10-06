@@ -1,4 +1,4 @@
-class ResultsController < ApplicationController
+class ResultsController < AdminController
   def index
     @results = Result.all
   end

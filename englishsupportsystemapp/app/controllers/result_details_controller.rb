@@ -1,4 +1,4 @@
-class ResultDetailsController < ApplicationController
+class ResultDetailsController < AdminController
   def edit
     @detail = ResultDetail.find(params[:id])
   end

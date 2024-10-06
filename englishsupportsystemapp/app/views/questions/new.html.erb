@@ -1,2 +1,15 @@
-<h1>Questions#new</h1>
-<p>Find me in app/views/questions/new.html.erb</p>
+<% content_for :title, "Add question" %>
+
+<%= form_with model: @question, url: "/exercises/#{@exercise_id}/questions" do |form| %>
+  <div class="mb-3">
+    <%= form.label :name, "Name:", class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+    <% @question.errors.full_messages_for(:name).each do |message| %>
+      <div class="alert alert-danger mt-1"><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit "Add", class: "btn btn-primary" %>
+  </div>
+<% end %>

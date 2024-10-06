@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root :to => "courses#index"
+  root :to => "home#index"
 
   # Course route
   resources :courses
@@ -8,25 +8,33 @@ Rails.application.routes.draw do
   resources :lessons
 
   # Exercise route
-  resources :exercises
+  resources :exercises do
+    resources :questions, only: [:index, :new, :create, :edit, :update, :destroy] do
+      resources :answers, only: [:index, :new, :create, :edit, :update, :destroy]
+    end
+  end
 
-  # Result route
-  resources :results, only: [:index, :show]
+  # Result route nested result details route
+  resources :results, only: [:index, :show] do
+    resources :result_details, only: [:edit, :update]
+  end
 
-  # Result details
-  resources :results, only: [:edit, :update]
-
-  # Question route
-  resources :questions, only: [:new, :create, :show, :edit, :update, :destroy]
-
-  # Answer route
-  resources :answers, only: [:new, :create, :edit, :update, :destroy]
-
+  # Login route
+  get "login", to: "user_sessions#new"
+  post "login", to: "user_sessions#create"
+  delete "logout", to: "user_sessions#destroy"
 
   # API route for all tables
   namespace :api do
+    # API for course
     resources :courses, only: [:index]
+    # API for lessons
     resources :lessons, only: [:index]
+    # API for users
+    post "/users/login", "users#login"
+    post "/users/register", "users#register"
+    get "/users/current_user", "users#current_user"
+    post "/users/update", "users#update"
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

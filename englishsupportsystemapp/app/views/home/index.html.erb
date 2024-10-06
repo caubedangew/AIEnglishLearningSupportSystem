@@ -1,0 +1,9 @@
+<% content_for :title, "Home" %>
+
+<h2 class="text-center text-info">
+    <% if current_user %>    
+        Welcome, Admin <%= current_user.last_name %> <%= current_user.first_name %>
+    <% else %>
+        You need to login as administrator to manage all data.
+    <% end %>
+</h2>

@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_24_082649) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_29_092959) do
   create_table "answers", charset: "utf8mb3", force: :cascade do |t|
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "question_id"
+    t.boolean "is_correct"
     t.index ["question_id"], name: "index_answers_on_question_id"
   end
 
@@ -29,7 +30,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_24_082649) do
 
   create_table "exercises", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
-    t.string "type"
+    t.string "exercise_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "lesson_id"
@@ -83,7 +84,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_24_082649) do
     t.string "email"
     t.string "last_name"
     t.string "username"
-    t.string "password"
+    t.string "password_digest"
     t.string "role"
     t.date "date_of_birth"
     t.boolean "gender"

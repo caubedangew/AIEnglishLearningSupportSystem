@@ -1,0 +1,14 @@
+=> 
+[32m#<User:0x000001cab3e44c90[0m
+ id: [36m[1mnil[0m,
+ first_name: [31m[1m"[0m[31mabc[0m[31m[1m"[0m,
+ email: [31m[1m"[0m[31m[FILTERED][0m[31m[1m"[0m,
+ last_name: [31m[1m"[0m[31mxyz[0m[31m[1m"[0m,
+ username: [31m[1m"[0m[31mabcxyz[0m[31m[1m"[0m,
+ password_digest: [31m[1m"[0m[31m[FILTERED][0m[31m[1m"[0m,
+ role: [31m[1m"[0m[31muser[0m[31m[1m"[0m,
+ date_of_birth: [31m[1m"[0m[31m2003-03-30[0m[31m[1m"[0m,
+ gender: [36m[1mtrue[0m,
+ english_level: [34m[1m1[0m,
+ created_at: [36m[1mnil[0m,
+ updated_at: [36m[1mnil[0m[32m>[0m

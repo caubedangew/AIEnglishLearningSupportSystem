@@ -1,4 +1,4 @@
-class LessonsController < ApplicationController
+class LessonsController < AdminController
   def index
     @lessons = Lesson.all
   end

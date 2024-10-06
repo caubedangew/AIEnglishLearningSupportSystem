@@ -1,4 +1,4 @@
-class ExercisesController < ApplicationController
+class ExercisesController < AdminController
   def index
     @exercises = Exercise.all
   end
@@ -6,6 +6,7 @@ class ExercisesController < ApplicationController
   def new
     @exercise = Exercise.new
     @lessons = Lesson.all
+    @exercise_type = exercise_type
   end
 
   def create
@@ -20,12 +21,13 @@ class ExercisesController < ApplicationController
   end
 
   def show
-    @questions = Question.where(exercise_id: params[:id]).all
+    
   end
 
   def edit
     @exercise = Exercise.find(params[:id])
     @lessons = Lesson.all
+    @exercise_type = exercise_type
   end
 
   def update
@@ -48,6 +50,16 @@ class ExercisesController < ApplicationController
 
   private
     def exercise_params
-      params.require(:exercise).permit(:name, :type, :lesson_id)
+      params.require(:exercise).permit(:name, :exercise_type, :lesson_id)
+    end
+
+    def exercise_type
+      [
+        ["Multiple choice", "multiple_choice"],
+        ["Fill in the blank", "blank_filling"],
+        ["Translating", "translating"], 
+        ["Reading", "reading"], 
+        ["Speaking", "speaking"]
+      ]
     end
 end

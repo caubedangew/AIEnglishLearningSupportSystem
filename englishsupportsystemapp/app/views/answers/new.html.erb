@@ -1,2 +1,23 @@
-<h1>Answers#new</h1>
-<p>Find me in app/views/answers/new.html.erb</p>
+<% content_for :title, "Add answer" %>
+
+<%= form_with model: @answer, url: "/exercises/#{@exercise_id}/questions/#{@question_id}/answers" do |form| %>
+  <div class="mb-3">
+    <%= form.label :content, "Content:", class: "form-label" %><br>
+    <%= form.text_field :content, class: "form-control" %>
+    <% @answer.errors.full_messages_for(:content).each do |message| %>
+      <div class="alert alert-danger mt-1"><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :is_correct, "Correct:", class: "form-label" %><br>
+    <%= form.label :is_correct, "True", value: "true"  %>
+    <%= form.radio_button :is_correct, true %>
+    <%= form.label :is_correct, "", value: "false" %>
+    <%= form.radio_button :is_correct, false, checked: true %>
+  </div>
+
+  <div>
+    <%= form.submit "Add", class: "btn btn-primary" %>
+  </div>
+<% end %>

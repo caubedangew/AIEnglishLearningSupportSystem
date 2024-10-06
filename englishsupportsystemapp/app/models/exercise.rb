@@ -8,7 +8,7 @@ class Exercise < ApplicationRecord
     maximum: 255, too_long: "can not exceed 255 characters"
   }
 
-  validates :type, inclusion: {
+  validates :exercise_type, inclusion: {
     in: %w(multiple_choice blank_filling translating reading speaking),
     message: "is not a valid choice."
   }

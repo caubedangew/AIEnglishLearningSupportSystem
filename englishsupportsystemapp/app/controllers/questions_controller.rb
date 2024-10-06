@@ -1,13 +1,20 @@
-class QuestionsController < ApplicationController
+class QuestionsController < AdminController
+  def index
+    @questions = Question.where(exercise_id: params[:exercise_id]).all
+    @exercise_id = params[:exercise_id]
+  end
+
   def new
     @question = Question.new
+    @exercise_id = params[:exercise_id]
   end
 
   def create
     @question = Question.new(question_params)
+    @question.exercise_id = params[:exercise_id]
     
     if @question.save
-      redirect_to :back
+      redirect_to exercise_questions_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -18,23 +25,29 @@ class QuestionsController < ApplicationController
   end
 
   def edit
-    @answer = Answer.find(params[:id])
+    @question = Question.find(params[:id])
+    @exercise_id = params[:exercise_id]
   end
 
   def update
-    @answer = Answer.find(params[:id])
+    @question = Question.find(params[:id])
 
-    if @answer.update(answer_params)
-      redirect_to :back
+    if @question.update(question_params)
+      redirect_to exercise_questions_path
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @answer = Answer.find(params[:id])
-    @answer.destroy
+    @question = Question.find(params[:id])
+    @question.destroy
 
-    redirect_to 
+    redirect_to exercise_questions_path
   end
+
+  private
+    def question_params
+      params.require(:question).permit(:name)
+    end
 end

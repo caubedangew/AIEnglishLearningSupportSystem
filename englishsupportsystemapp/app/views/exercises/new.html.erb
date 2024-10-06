@@ -10,17 +10,20 @@
   </div>
 
   <div class="mb-3">
-    <%= form.label :type, "Type:", class: "form-label" %>
-    <%= form.text_field :type, class: "form-control" %>
-    <% @exercise.errors.full_messages_for(:type).each do |message| %>
+    <%= form.label :exercise_type, "Type:", {class: "form-label"} %>
+    <%= form.select :exercise_type, @exercise_type, {}, {class: "form-control"} %>
+    <% @exercise.errors.full_messages_for(:exercise_type).each do |message| %>
       <div class="alert alert-danger mt-1"><%= message %></div>
     <% end %>
   </div>
 
   <div class="mb-3">
-    <%= form.label :level, "Level:", class: "form-label" %>
-    <%= form.text_field :level, class: "form-control" %>
-    <% @exercise.errors.full_messages_for(:level).each do |message| %>
+    <%= form.label :lesson_id, "Lesson:", {class: "form-label"} %>
+    <%= form.select :lesson_id, @lessons.map {
+        |lesson| [lesson.name, lesson.id]
+      }, {}, {class: "form-control"}
+     %>
+    <% @exercise.errors.full_messages_for(:lesson_id).each do |message| %>
       <div class="alert alert-danger mt-1"><%= message %></div>
     <% end %>
   </div>

@@ -1,4 +1,4 @@
-class StatsController < ApplicationController
+class StatsController < AdminController
   def index
     
   end
