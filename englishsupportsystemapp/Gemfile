@@ -8,7 +8,7 @@ gem "rails", "~> 7.2.1"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 # Use mysql as the database for Active Record
-gem 'mysql2', '~> 0.5.6'
+gem "mysql2", "~> 0.5.6"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
@@ -19,8 +19,14 @@ gem "turbo-rails"
 gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
-# Use pundit for authorization
+# Use pundit for server authorization
 gem "pundit"
+# Use Chartkick for statistics
+gem "chartkick"
+# Use Async for async tasks
+gem "async"
+# Use JWT for one-time client authentication
+gem "jwt"
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
@@ -61,3 +67,4 @@ group :test do
   gem "selenium-webdriver"
 end
 
+gem "groupdate", "~> 6.5"

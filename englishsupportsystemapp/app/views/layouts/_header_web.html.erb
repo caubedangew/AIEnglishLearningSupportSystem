@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary mb-3">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/users/home">English support system</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/users/courses">Courses</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/online_chat">Online chat</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/forum">Forum</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/vocabulary">Vocabulary</a>
+        </li>
+      </ul>
+      
+      <ul class="navbar-nav ms-auto">
+        <% if session[:user] %>
+          <li class="nav-item">
+            <a class="nav-link" href="/users/profile">Hello, <%= session[:user]["username"] %></a>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Logout', "/users/logout", class: "nav-link", data: { turbo_method: :delete } %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <a class="nav-link" href="/users/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/users/register">Register</a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

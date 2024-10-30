@@ -1,0 +1,75 @@
+<% content_for :title, "Courses" %>
+
+<%# List courses %>
+<div class="accordion" id="accordionExample">
+  <% @courses.each do |course| %>
+    <div class="accordion-item <%= course["level"] == session[:user]["english_level"]? "border border-success border-2": "" %>">
+        <h2 class="accordion-header" id="headingCourse<%= course['id'] %>">
+        <button class="accordion-button <%= course["id"]==1? "": "collapsed" %>" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCourse<%= course['id'] %>" aria-expanded="true" aria-controls="collapseCourse<%= course['id'] %>">
+            <%= course['name'] %>
+        </button>
+        </h2>
+        <div id="collapseCourse<%= course['id'] %>" class="accordion-collapse collapse <%= course["id"]==1? "show": "" %>" aria-labelledby="headingCourse<%= course['id'] %>" data-bs-parent="#accordiCourse<%= course['id'] %>xample">
+        <div class="accordion-body">
+            <%= course['description'] %>
+            <div class="d-flex justify-content-end">
+                <button class="btn <%= course["level"] <= %>" data-bs-toggle="modal" data-bs-target="#Modal">Enroll</button>
+            </div>
+        </div>
+        </div>
+    </div>
+  <% end %>
+
+<%# Pagination %>
+  <nav aria-label="Page navigation example">
+    <form method="get">
+      <ul class="pagination justify-content-center mt-3">
+        <% if @page == 1 %>
+          <li class="page-item disabled">
+            <button type="submit" name="page" value="<%= @page.to_i - 1 %>" class="page-link" tabindex="-1" aria-disabled="true">Previous</button>
+          </li>
+        <% else %>
+          <li class="page-item">
+            <button type="submit" name="page" value="<%= @page.to_i - 1 %>" class="page-link">Previous</button>
+          </li>
+        <% end %>
+        <% (1..@max_page).each do |index|%>  
+          <% if @page.to_i == index %>
+            <li class="page-item active" aria-current="page">
+              <button class="page-link" type="submit" name="page" value="<%= index %>"><%= index %></button>
+            </li>  
+          <% else %>
+            <li class="page-item"><button class="page-link" type="submit" name="page" value="<%= index %>"><%= index %></button></li>
+          <% end %>
+        <% end %>
+        <% if @page == @max_page %>
+          <li class="page-item disabled">
+            <button type="submit" name="page" value="<%= @page.to_i + 1 %>" class="page-link" tabindex="-1" aria-disabled="true">Next</button>
+          </li>
+        <% else %>
+          <li class="page-item">
+            <button type="submit" name="page" value="<%= @page.to_i + 1 %>" class="page-link">Next</button>
+          </li>
+        <% end %>
+      </ul>
+    </form>
+  </nav>
+</div>
+
+<%# Modal submit %>
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thanks you</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        To make sure, press the Ready button to enjoy our course
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  course: one
+  enroll_at: 2024-10-20 17:04:25
+  is_active: false
+
+two:
+  user: two
+  course: two
+  enroll_at: 2024-10-20 17:04:25
+  is_active: false

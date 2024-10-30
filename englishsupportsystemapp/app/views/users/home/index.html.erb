@@ -1,0 +1,9 @@
+<% content_for :title, "Home" %>
+
+<% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+<h2 class="text-info text-center">Welcome to our page</h2>

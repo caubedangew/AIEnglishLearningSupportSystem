@@ -1,8 +1,10 @@
 class Course < ApplicationRecord
   has_many :lessons, dependent: :restrict_with_error
+  has_many :enrollments, dependent: :restrict_with_error
+  has_many :users, through: :enrollments
 
   validates :name, uniqueness: {
-    message: -> (object, data) do
+    message: ->(object, data) do
       " '#{data[:value]}' is already taken."
     end
   }, presence: true, length: {
@@ -15,6 +17,5 @@ class Course < ApplicationRecord
 
   validates :level, comparison: {
     greater_than: 0, message: "can not less than 1."
-  }  
-
+  }
 end

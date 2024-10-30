@@ -1,5 +1,29 @@
 Rails.application.routes.draw do
-  root :to => "home#index"
+  # Frontend route
+  namespace :users do
+    # Vocabulary routes
+    get "vocabulary", to: "vocabulary#index"
+    # Online chat routes
+    get "online_chat", to: "online_chat#index"
+    # Forum routes
+    get "forum", to: "forum#index"
+    # Home route
+    get "home", to: "home#index"
+
+    # Users route
+    get "login", to: "users#login"
+    post "login", to: "users#create"
+    get "register", to: "users#register"
+    post "register", to: "users#submit"
+    delete "logout", to: "users#destroy"
+    get "profile", to: "users#profile"
+    post "profile", to: "users#update"
+
+    # Courses route
+    get "courses", to: "courses#index"
+  end
+
+  root to: "home#index"
 
   # Course route
   resources :courses
@@ -9,15 +33,18 @@ Rails.application.routes.draw do
 
   # Exercise route
   resources :exercises do
-    resources :questions, only: [:index, :new, :create, :edit, :update, :destroy] do
-      resources :answers, only: [:index, :new, :create, :edit, :update, :destroy]
+    resources :questions, only: [ :index, :new, :create, :edit, :update, :destroy ] do
+      resources :answers, only: [ :index, :new, :create, :edit, :update, :destroy ]
     end
   end
 
   # Result route nested result details route
-  resources :results, only: [:index, :show] do
-    resources :result_details, only: [:edit, :update]
+  resources :results, only: [ :index, :show ] do
+    resources :result_details, only: [ :edit, :update ]
   end
+
+  # Statistics route
+  get "stats", to: "stats#index"
 
   # Login route
   get "login", to: "user_sessions#new"
@@ -27,9 +54,9 @@ Rails.application.routes.draw do
   # API route for all tables
   namespace :api do
     # API for course
-    resources :courses, only: [:index]
+    resources :courses, only: [ :index ]
     # API for lessons
-    resources :lessons, only: [:index]
+    resources :lessons, only: [ :index ]
     # API for users
     post "/users/login", "users#login"
     post "/users/register", "users#register"
@@ -46,5 +73,4 @@ Rails.application.routes.draw do
   # Render dynamic PWA files from app/views/pwa/*
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-
 end

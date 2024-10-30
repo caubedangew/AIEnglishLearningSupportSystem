@@ -1,2 +1,36 @@
-<h1>Stats#index</h1>
-<p>Find me in app/views/stats/index.html.erb</p>
+<% content_for :title, "Statistic for course enrollment"%>
+<form class="row g-3" method="get">
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon2">Month</span>
+    <input type="number" min="1" max="12" class="form-control" placeholder="Enter month..." aria-label="Month" aria-describedby="basic-addon2" name="month" value="<%= @month %>">
+    <span class="input-group-text" id="basic-addon2">Year</span>
+    <input type="number" min="2024" max="<%= Time.now.year %>" class="form-control" placeholder="Enter year..." aria-label="Month" aria-describedby="basic-addon2" name="year" value="<%= @year %>">
+    <button type="submit" class="btn btn-primary" id="basic-addon2">Submit</button>
+  </div>
+</form>
+
+<div class="row">
+    <div class="col-md-5 col-sm-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Course name</th>
+                    <th>Number of students enroll</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @stats.each do |stat| %>
+                    <tr>
+                        <td><%= stat.id %></td>
+                        <td><%= stat.name %></td>
+                        <td><%= stat.quantity %></td>
+                    </tr>
+                <% end %>
+            </tbody>        
+        </table>
+    </div>
+    <div class="col-md-7 col-sm-12">
+        <%= column_chart @stats.map {|stat| [stat.name, stat.quantity]} %>
+    </div>
+</div>
